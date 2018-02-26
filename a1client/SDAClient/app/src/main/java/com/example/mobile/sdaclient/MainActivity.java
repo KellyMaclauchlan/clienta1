@@ -84,8 +84,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                         break;
                     case 1:  response=server.deleteDocument(text1.getText().toString());
                         break;
-                    case 2: response=server.newDocument(text1.getText().toString(),text2.getText().toString(),"","",
-                        "","");
+                    case 2: response=server.newDocument(text1.getText().toString(),text2.getText().toString(),text3.getText().toString(),text6.getText().toString(),
+                            text4.getText().toString(),text5.getText().toString());
                         break;
                     case 3:  response=server.deleteDocuments(text4.getText().toString());
                         break;
