@@ -69,35 +69,53 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             @Override
             public void onClick(View view) {
                 // in here use the end point to call the correct function in the server class that will talk to the server
-                String response=server.getMainPage();
-                textResult.setText(response);
+                String response;//=server.getMainPage();
+
+
                 switch (endpoint) {
                     case 0:
-                        showIDOnly();
+                        response=server.view(text1.getText().toString());
                         break;
-                    case 1:  showIDOnly();
+                    case 1:  response=server.deleteDocument(text1.getText().toString());
                         break;
-                    case 2: showAll();
+                    case 2: response=server.newDocument(text1.getText().toString(),text2.getText().toString(),"","",
+                        "","");
                         break;
-                    case 3:  showTagsOnly();
+                    case 3:  response=server.deleteDocuments(text4.getText().toString());
                         break;
-                    case 4:  showNone();
+                    case 4:  response=server.getDocuments();
                         break;
-                    case 5: showTagsOnly();
+                    case 5: response=server.searchDocuments(text4.getText().toString());
                         break;
-                    case 6:  showNone();
+                    case 6:  response=server.reset();
                         break;
-                    case 7:  showNone();
+                    case 7:  response=server.getList();
                         break;
-                    case 8:  showNone();
+                    case 8:  response=server.pagerank();
                         break;
-                    case 9:  showNone();
+                    case 9:  response=server.boost();
                         break;
-                    case 10: showTagsOnly();
+                    case 10: response=server.update(text1.getText().toString(),text2.getText().toString(),"","",
+                            "","");
                         break;
-                    default: showIDOnly();
+                    case 11:  response=server.register();
+                        break;
+                    case 12: response=server.unregister();
+                        break;
+                    case 13:  response=server.crawl();
+                        break;
+                    case 14:  response=server.simpleQuerry(text4.getText().toString());
+                        break;
+                    case 15: response=server.querry(text4.getText().toString());
+                        break;
+                    case 16:  response=server.noboost();
+                        break;
+                    case 17:  response=server.viewGraph();
+                        break;
+                    default: response=server.getMainPage();
                         break;
                 }
+                textResult.setText(response);
             }
         });
     }
@@ -163,7 +181,23 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 break;
             case 9:  showNone();
                 break;
-            case 10: showTagsOnly();
+            case 10: showNone();
+                break;
+            case 11:  showAll();
+                break;
+            case 12: showNone();
+                break;
+            case 13:  showNone();
+                break;
+            case 14:  showNone();
+                break;
+            case 15: showTagsOnly();
+                break;
+            case 16:  showTagsOnly();
+                break;
+            case 17:  showNone();
+                break;
+            case 18:  showNone();
                 break;
             default: showIDOnly();
                 break;

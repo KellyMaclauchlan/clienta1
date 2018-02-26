@@ -6,12 +6,19 @@
         <item>Delete Document</item>
         <item>New Document</item>
         <item>Delete By Tags</item>
-        <item>List All Documents</item>
+        <item>Documents</item>
         <item>Search</item>
         <item>Reset</item>
         <item>List</item>
         <item>PageRank</item>
         <item>Boost</item>
-        <item>Update</item>
+        <item>Update Document</item>
+        <item>Register</item>
+        <item>Unregister</item>
+        <item>Crawl</item>
+        <item>Simple Query</item>
+        <item>Query</item>
+        <item>No Boost</item>
+        <item>View Graph</item>
     </string-array>
 </resources>
