@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -22,6 +23,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     EditText text2;// = (EditText) findViewById(R.id.editText2) ;
     EditText text3 ;//= (EditText) findViewById(R.id.editText3) ;
     EditText text4 ;//= (EditText) findViewById(R.id.editText4) ;
+    EditText text5 ;//= (EditText) findViewById(R.id.editText3) ;
+    EditText text6 ;
     EditText textResult ;
     Button go;//=(Button)findViewById(R.id.button);
     ServerConnection server;
@@ -39,8 +42,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
          text2 = (EditText) findViewById(R.id.editText2) ;
          text3 = (EditText) findViewById(R.id.editText3) ;
          text4 = (EditText) findViewById(R.id.editText4) ;
-         textResult=(EditText)findViewById(R.id.editText5);
+         text5=(EditText)findViewById(R.id.editText5);
+        text6=(EditText)findViewById(R.id.editText6);
          go=(Button)findViewById(R.id.button);
+        WebView webview = (WebView)findViewById(R.id.webView);
+        webview.setVisibility(View.INVISIBLE);
 //        ServerConnection server;
 //        int endpoint=0;
         // Create an ArrayAdapter using the string array and a default spinner layout
@@ -95,8 +101,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                         break;
                     case 9:  response=server.boost();
                         break;
-                    case 10: response=server.update(text1.getText().toString(),text2.getText().toString(),"","",
-                            "","");
+                    case 10: response=server.update(text1.getText().toString(),text2.getText().toString(),text3.getText().toString(),text6.getText().toString(),
+                            text4.getText().toString(),text5.getText().toString());
                         break;
                     case 11:  response=server.register();
                         break;
@@ -112,10 +118,19 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                         break;
                     case 17:  response=server.viewGraph();
                         break;
+                    case 18: response=server.deleteQuerry(text4.getText().toString());
+                        break;
+                    case 19: response = server.getMainPage();
                     default: response=server.getMainPage();
+
                         break;
                 }
-                textResult.setText(response);
+                //textResult.setText(response);
+                WebView webview = (WebView)findViewById(R.id.webView);
+                webview.setVisibility(View.VISIBLE);
+                webview.bringToFront();
+                webview.getSettings().setJavaScriptEnabled(true);
+                webview.loadDataWithBaseURL("", response, "text/html", "UTF-8", "");
             }
         });
     }
@@ -157,7 +172,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         <item>PageRank</item>
         <item>Boost</item>
         <item>Update</item>*/
-
+        WebView webview = (WebView)findViewById(R.id.webView);
+        webview.setVisibility(View.INVISIBLE);
         endpoint=pos;
         switch (pos) {
             case 0:
@@ -189,17 +205,19 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 break;
             case 13:  showNone();
                 break;
-            case 14:  showNone();
+            case 14:  showTagsOnly();
                 break;
             case 15: showTagsOnly();
                 break;
-            case 16:  showTagsOnly();
+            case 16:  showNone();
                 break;
             case 17:  showNone();
                 break;
-            case 18:  showNone();
+            case 18:  showTagsOnly();
                 break;
-            default: showIDOnly();
+            case 19:  showNone();
+                break;
+            default: showTagsOnly();
                 break;
         }
     }
@@ -208,24 +226,32 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         text2.setVisibility(View.INVISIBLE);
         text3.setVisibility(View.INVISIBLE);
         text4.setVisibility(View.INVISIBLE);
+        text6.setVisibility(View.INVISIBLE);
+        text5.setVisibility(View.INVISIBLE);
     }
     public void showTagsOnly(){
         text1.setVisibility(View.INVISIBLE);
         text2.setVisibility(View.INVISIBLE);
         text3.setVisibility(View.INVISIBLE);
         text4.setVisibility(View.VISIBLE);
+        text5.setVisibility(View.INVISIBLE);
+        text6.setVisibility(View.INVISIBLE);
     }
     public void showAll(){
         text1.setVisibility(View.VISIBLE);
         text2.setVisibility(View.VISIBLE);
         text3.setVisibility(View.VISIBLE);
         text4.setVisibility(View.VISIBLE);
+        text5.setVisibility(View.VISIBLE);
+        text6.setVisibility(View.VISIBLE);
     }
     public void showNone(){
         text1.setVisibility(View.INVISIBLE);
         text2.setVisibility(View.INVISIBLE);
         text3.setVisibility(View.INVISIBLE);
         text4.setVisibility(View.INVISIBLE);
+        text5.setVisibility(View.INVISIBLE);
+        text6.setVisibility(View.INVISIBLE);
 
     }
 

@@ -20,5 +20,7 @@
         <item>Query</item>
         <item>No Boost</item>
         <item>View Graph</item>
+        <item>Delete Query</item>
+        <item>Get Main Page</item>
     </string-array>
 </resources>

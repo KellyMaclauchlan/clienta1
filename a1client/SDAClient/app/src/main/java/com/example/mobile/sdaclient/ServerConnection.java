@@ -38,7 +38,7 @@ public class ServerConnection {
     String boost="boost";
     String noboost="noboost";
     String update="update";
-    private static String BASE_URL = "http://192.168.1.5:8080/COMP4601-SDA";
+    private static String BASE_URL = "http://192.168.1.5:8080/COMP4601-SDA"; //<---- change to ip adress desired here
     WebResource service;
     Client client;
     ClientConfig config;
@@ -186,6 +186,14 @@ public class ServerConnection {
                 .accept(MediaType.TEXT_HTML).get(String.class);
     }
 
+    public String deleteQuerry(String query){
+        Form form = new Form();
+        form.add("query", query);
+
+        return String.valueOf(service.path(REST).path(SDA).path("deletequery")
+                .type(MediaType.APPLICATION_FORM_URLENCODED)
+                .post(ClientResponse.class, form));
+    }
 
 
     private static URI getBaseURI() {
